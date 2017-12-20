@@ -30,7 +30,7 @@ class UsersController extends Controller
         'password'=>bcrypt($request->password),
       ]);
 
-      session()->flash('success','Welcome,you will have a new trip')
+      session()->flash('success','Welcome,you will have a new trip');
       return redirect()->route('users.show',[$user]);
     }
 }
