@@ -6,12 +6,13 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\User;
 use Auth;
+use Mail;
 
 class UsersController extends Controller
 {
     public function __construct(){
       $this->middleware('auth',[
-        'except'=>['show','create','store','index']
+        'except'=>['show','create','store','index','confirmEmail']
       ]);
 
       $this->middleware('guest',[
@@ -46,9 +47,12 @@ class UsersController extends Controller
         'password'=>bcrypt($request->password),
       ]);
 
-      Auth::login($user);
-      session()->flash('success','Welcome,you will have a new trip');
-      return redirect()->route('users.show',[$user]);
+      //Auth::login($user);
+      $this->sendEmailConfirmationTo($user);
+      //session()->flash('success','Welcome,you will have a new trip');
+      session()->flash('success','Confirmation email has sent to you email address!');
+      //return redirect()->route('users.show',[$user]);
+      return redirect('/');
     }
 
     public function edit(User $user){
@@ -81,5 +85,30 @@ class UsersController extends Controller
       $user->delete();
       session()->flash('success','Delete successfully!');
       return back();
+    }
+
+    protected function sendEmailConfirmationTo($user){
+      $view='emails.confirm';
+      $data=compact('user');
+      $from='h-zhang@junction.tokyo';
+      $name='Admin';
+      $to=$user->email;
+      $subject="Thank you for signing!";
+
+      Mail::send($view,$data,function($message) use ($from,$name,$to,$subject){
+        $message->from($from,$name)->to($to)->subject($subject);
+      });
+    }
+
+    public function confirmEmail($token){
+      $user=User::where('activation_token',$token)->firstOrFail();
+
+      $user->activated=true;
+      $user->activation_token=null;
+      $user->save();
+
+      Auth::login($user);
+      session()->flash('success','Congratulations!');
+      return redirect()->route('users.show',[$user]);
     }
 }

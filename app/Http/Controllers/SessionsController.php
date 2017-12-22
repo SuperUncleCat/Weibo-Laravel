@@ -13,7 +13,7 @@ class SessionsController extends Controller
         'only'=>['create']
       ]);
     }
-    
+
     public function create(){
       return view('sessions.create');
     }
@@ -25,8 +25,14 @@ class SessionsController extends Controller
       ]);
 
       if(Auth::attempt($credentials,$request->has('remember'))){
-        session()->flash('success','Welcome back!');
-        return redirect()->intended(route('users.show',[Auth::user()]));
+        if(Auth::user()->activated){
+          session()->flash('success','Welcome back!');
+          return redirect()->intended(route('users.show',[Auth::user()]));
+        }else{
+          Auth::logout();
+          session()->flash('warning','Your account is not avaliable!');
+          return redirect('/');
+        }
       }else{
         session()->flash('danger','Sorry,your email or password is not right');
         return redirect()->back();
