@@ -8,13 +8,15 @@
 </p>
 
 ## Copy
-
+```
 cd /var/www
 git clone https://github.com/SuperUncleCat/Weibo-Laravel.git
+```
 
 ## Run
-
-<code>composer install</code>
+```
+composer install
+```
 
 ## License
 
