@@ -14,7 +14,7 @@ git clone https://github.com/SuperUncleCat/Weibo-Laravel.git
 
 ## Run
 
-composer install
+<code>composer install</code>
 
 ## License
 
