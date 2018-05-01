@@ -9,6 +9,7 @@
 
 ## Screenshot
 
+![image](Weibo-Laravel/public/images/weibo.PNG)
 
 ## Copy
 ```
