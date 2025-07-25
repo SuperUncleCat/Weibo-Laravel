@@ -18,6 +18,6 @@ class DatabaseSeeder extends Seeder
       $this->call(StatusesTableSeeder::class);
       $this->call(FollowersTableSeeder::class);
 
-      Model::regurad();
+      Model::reguard();
     }
 }
