@@ -12,9 +12,11 @@ class StatusPolicy
     use HandlesAuthorization;
 
     /**
-     * Create a new policy instance.
+     * Determine whether the given user can delete the status.
      *
-     * @return void
+     * @param  \App\User   $user
+     * @param  \App\Status $status
+     * @return bool
      */
     public function destroy(User $user,Status $status)
     {
