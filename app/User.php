@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Notifications\ResetPassword;
 use Auth;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -34,7 +35,7 @@ class User extends Authenticatable
       parent::boot();
 
       static::creating(function($user){
-        $user->activation_token=str_random(30);
+        $user->activation_token = Str::random(30);
       });
     }
 
