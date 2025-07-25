@@ -70,16 +70,16 @@ class User extends Authenticatable
       return $this->belongsToMany(User::Class,'followers','follower_id','user_id');
     }
 
-    public function follow($user_ids){
+  public function follow($user_ids){
       if(!is_array($user_ids)){
-        $user_ids=compact('user_ids');
+        $user_ids=[ $user_ids ];
       }
       $this->followings()->sync($user_ids,false);
     }
 
     public function unfollow($user_ids){
       if(!is_array($user_ids)){
-        $user_ids=compact('user_ids');
+        $user_ids=[ $user_ids ];
       }
       $this->followings()->detach($user_ids);
     }
