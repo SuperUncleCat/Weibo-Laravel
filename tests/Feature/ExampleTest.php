@@ -18,4 +18,16 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    /**
+     * Ensure password reset email route redirects.
+     *
+     * @return void
+     */
+    public function testPasswordEmailPostRedirects()
+    {
+        $response = $this->post('/password/email', ['email' => 'foo@example.com']);
+
+        $response->assertStatus(302);
+    }
 }
