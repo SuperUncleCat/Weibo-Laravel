@@ -53,7 +53,7 @@ class UsersController extends Controller
       //Auth::login($user);
       $this->sendEmailConfirmationTo($user);
       //session()->flash('success','Welcome,you will have a new trip');
-      session()->flash('success','Confirmation email has sent to you email address!');
+      session()->flash('success','Confirmation email has been sent to your email address!');
       //return redirect()->route('users.show',[$user]);
       return redirect('/');
     }
