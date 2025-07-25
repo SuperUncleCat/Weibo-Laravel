@@ -43,8 +43,9 @@ class User extends Authenticatable
       return "http://www.gravatar.com/avatar/$hash?s=$size";
     }
 
-    public function sendPasswordResetNotfication($token){
-      $this->notify(new ResetPassword($token));
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPassword($token));
     }
 
     public function statuses(){
