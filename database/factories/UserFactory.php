@@ -1,6 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ $factory->define(App\User::class, function (Faker $faker) {
         'is_admin'=>false,
         'activated'=>true,
         'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'remember_token' => Str::random(10),
         'created_at' => $date_time,
         'updated_at' => $date_time,
     ];
